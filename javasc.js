@@ -36,6 +36,16 @@ document.addEventListener("DOMContentLoaded", function(){
         currentScreen.textContent = currentValue;
     })
 
+    equal.addEventListener("click", function(){
+        calculate()
+        previousScreen.textContent = '';
+        currentScreen.textContent = previousValue;
+    })
+
+    decimal.addEventListener("click", function(){
+        addDecimal();
+    })
+
 })
 
 function handleNumber(num){
@@ -48,4 +58,30 @@ function handleOperator(op){
     operator = op;
     previousValue = currentValue;
     currentValue = '';
+}
+function calculate(){
+    previousValue = Number(previousValue);
+    currentValue = Number(currentValue);
+
+    if(operator === "+"){
+        previousValue += currentValue;
+    } else if (operator === "-"){
+        previousValue -= currentValue;
+    } else if (operator === "X"){
+        previousValue *= currentValue;
+    } else {
+        previousValue /= currentValue;
+    }
+    
+    console.log(previousValue);
+}
+
+function roundNumb(num){
+    return Math.round(num * 1000) / 1000;
+}
+
+function addDecimal(){
+    if(!currentValue.includes(".")){
+        currentValue += '.';
+    }
 }
